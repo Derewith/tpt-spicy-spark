@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable import/first */
 /**
  * Welcome to the main entry point of the app. In this file, we'll
@@ -16,6 +17,10 @@ if (__DEV__) {
   // If you turn it off in metro.config.js, you'll have to manually import it.
   require("./devtools/ReactotronConfig.ts")
 }
+import { Provider } from "react-redux"
+import { persistor, store } from "./store/store"
+import { PersistGate } from "redux-persist/integration/react"
+
 import "./utils/gestureHandler"
 import "./i18n"
 import "./utils/ignoreWarnings"
@@ -23,12 +28,12 @@ import { useFonts } from "expo-font"
 import React from "react"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 import * as Linking from "expo-linking"
-import { useInitialRootStore } from "./models"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
 import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import Config from "./config"
+import { GestureHandlerRootView } from "react-native-gesture-handler"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -72,15 +77,17 @@ function App(props: AppProps) {
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
 
-  const { rehydrated } = useInitialRootStore(() => {
-    // This runs after the root store has been initialized and rehydrated.
+  // React.useEffect(() => {
+  //   setTimeout(hideSplashScreen, 500)
+  // }, [])
 
+  const onBeforeLiftPersistGate = () => {
     // If your initialization scripts run very fast, it's good to show the splash screen for just a bit longer to prevent flicker.
     // Slightly delaying splash screen hiding for better UX; can be customized or removed as needed,
     // Note: (vanilla Android) The splash-screen will not appear if you launch your app via the terminal or Android Studio. Kill the app and launch it normally by tapping on the launcher icon. https://stackoverflow.com/a/69831106
     // Note: (vanilla iOS) You might notice the splash-screen logo change size. This happens in debug/development mode. Try building the app for release.
     setTimeout(hideSplashScreen, 500)
-  })
+  }
 
   // Before we show the app, we have to wait for our state to be ready.
   // In the meantime, don't render anything. This will be the background
@@ -88,9 +95,7 @@ function App(props: AppProps) {
   // In iOS: application:didFinishLaunchingWithOptions:
   // In Android: https://stackoverflow.com/a/45838109/204044
   // You can replace with your own loading component if you wish.
-  if (!rehydrated || !isNavigationStateRestored || (!areFontsLoaded && !fontLoadError)) {
-    return null
-  }
+  if (!isNavigationStateRestored || !areFontsLoaded || fontLoadError) return null
 
   const linking = {
     prefixes: [prefix],
@@ -101,14 +106,36 @@ function App(props: AppProps) {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <ErrorBoundary catchErrors={Config.catchErrors}>
-        <AppNavigator
-          linking={linking}
-          initialState={initialNavigationState}
-          onStateChange={onNavigationStateChange}
-        />
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Provider store={store}>
+            <PersistGate
+              loading={null}
+              onBeforeLift={onBeforeLiftPersistGate}
+              persistor={persistor}
+            >
+              <AppNavigator
+                linking={linking}
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            </PersistGate>
+          </Provider>
+        </GestureHandlerRootView>
       </ErrorBoundary>
     </SafeAreaProvider>
   )
+
+  // <Provider store={store}>
+  //   <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+  //     <ErrorBoundary catchErrors={Config.catchErrors}>
+  //       <AppNavigator
+  //         linking={linking}
+  //         initialState={initialNavigationState}
+  //         onStateChange={onNavigationStateChange}
+  //       />
+  //     </ErrorBoundary>
+  //   </SafeAreaProvider>
+  // </Provider>
 }
 
 export default App
