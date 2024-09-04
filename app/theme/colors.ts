@@ -44,6 +44,9 @@ export const colors = {
    * semantic names as much as possible.
    */
   palette,
+
+  grey: "rgb(128,128,130)",
+
   /**
    * A helper for making something see-thru.
    */
@@ -51,7 +54,7 @@ export const colors = {
   /**
    * The default text color in many components.
    */
-  text: palette.neutral800,
+  text: palette.neutral100,
   /**
    * Secondary text information.
    */
@@ -59,7 +62,7 @@ export const colors = {
   /**
    * The default color of the screen background.
    */
-  background: palette.neutral200,
+  background: "rgb(34,35,43)",
   /**
    * The default border color.
    */

@@ -53,6 +53,21 @@ export interface HeaderProps {
    * as well as explicitly setting locale or translation fallbacks.
    */
   titleTxOptions?: TextProps["txOptions"]
+
+  /**
+   * Optional subtitle style override.
+   */
+  subtitle: TextProps["text"]
+  /**
+   * Title text which is looked up via i18n.
+   */
+  subtitleTx?: TextProps["tx"]
+  /**
+   * Optional options to pass to i18n. Useful for interpolation
+   * as well as explicitly setting locale or translation fallbacks.
+   */
+  subtitleTxOptions?: TextProps["txOptions"]
+  subtitleStyleOverride: StyleProp<TextStyle>
   /**
    * Icon that should appear on the left.
    * Can be used with `onLeftPress`.
@@ -165,6 +180,10 @@ export function Header(props: HeaderProps) {
     titleMode = "center",
     titleTx,
     titleTxOptions,
+    subtitle,
+    subtitleTx,
+    subtitleTxOptions,
+    subtitleStyleOverride,
     titleContainerStyle: $titleContainerStyleOverride,
     style: $styleOverride,
     titleStyle: $titleStyleOverride,
@@ -174,6 +193,7 @@ export function Header(props: HeaderProps) {
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
 
   const titleContent = titleTx ? translate(titleTx, titleTxOptions) : title
+  const subtitleContent = subtitleTx ? translate(subtitleTx, subtitleTxOptions) : subtitle
 
   return (
     <View style={[$container, $containerInsets, { backgroundColor }, $containerStyleOverride]}>
@@ -204,6 +224,14 @@ export function Header(props: HeaderProps) {
               text={titleContent}
               style={[$title, $titleStyleOverride]}
             />
+            {subtitleContent && (
+              <Text
+                weight="light"
+                size="xs"
+                text={subtitleContent}
+                style={[$title, subtitleStyleOverride]}
+              />
+            )}
           </View>
         )}
 

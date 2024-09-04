@@ -8,10 +8,12 @@ import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
 import React from "react"
 import { useColorScheme } from "react-native"
-import * as Screens from "app/screens"
+// import * as Screens from "app/screens"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
+import { DemoNavigator } from "./DemoNavigator"
+import { TPTNavigator } from "./TPTNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -28,6 +30,8 @@ import { colors } from "app/theme"
  */
 export type AppStackParamList = {
   Welcome: undefined
+  Demo: undefined
+  TPT: undefined
   // 🔥 Your screens go here
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
@@ -49,7 +53,10 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 const AppStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, navigationBarColor: colors.background }}>
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+      {/* <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} /> */}
+      {/* <Stack.Screen name="Demo" component={DemoNavigator} /> */}
+      <Stack.Screen name="TPT" component={TPTNavigator} />
+
       {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>

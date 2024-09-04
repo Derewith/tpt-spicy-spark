@@ -124,18 +124,6 @@ function App(props: AppProps) {
       </ErrorBoundary>
     </SafeAreaProvider>
   )
-
-  // <Provider store={store}>
-  //   <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-  //     <ErrorBoundary catchErrors={Config.catchErrors}>
-  //       <AppNavigator
-  //         linking={linking}
-  //         initialState={initialNavigationState}
-  //         onStateChange={onNavigationStateChange}
-  //       />
-  //     </ErrorBoundary>
-  //   </SafeAreaProvider>
-  // </Provider>
 }
 
 export default App

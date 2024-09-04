@@ -21,16 +21,20 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = () => {
         <Text
           testID="welcome-heading"
           style={$welcomeHeading}
-          tx="welcomeScreen.readyForLaunch"
+          // tx="welcomeScreen.readyForLaunch"
+          text={"Benvenuto su\nReact Native Ignite"}
           preset="heading"
         />
-        <Text tx="welcomeScreen.exciting" preset="subheading" />
+        <Text 
+        // tx="welcomeScreen.exciting"
+        text="Siamo entusiasti di iniziare con te!"
+        preset="subheading" />
         <Image style={$welcomeFace} source={welcomeFace} resizeMode="contain" />
       </View>
 
-      <View style={[$bottomContainer, $bottomContainerInsets]}>
+      {/* <View style={[$bottomContainer, $bottomContainerInsets]}>
         <Text tx="welcomeScreen.postscript" size="md" />
-      </View>
+      </View> */}
     </View>
   )
 }
