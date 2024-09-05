@@ -138,6 +138,8 @@ export interface HeaderProps {
    * Override the default edges for the safe area.
    */
   safeAreaEdges?: ExtendedEdge[]
+
+  children?: ReactElement
 }
 
 interface HeaderActionProps {
@@ -188,6 +190,7 @@ export function Header(props: HeaderProps) {
     style: $styleOverride,
     titleStyle: $titleStyleOverride,
     containerStyle: $containerStyleOverride,
+    children,
   } = props
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
@@ -234,6 +237,8 @@ export function Header(props: HeaderProps) {
             )}
           </View>
         )}
+
+        {children}
 
         <HeaderAction
           tx={rightTx}

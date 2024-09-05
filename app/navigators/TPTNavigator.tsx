@@ -1,9 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { CompositeScreenProps } from "@react-navigation/native"
 import React from "react"
-import { TextStyle, ViewStyle } from "react-native"
+import { TextStyle, View, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { Icon } from "../components"
 import { translate } from "../i18n"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
@@ -24,6 +24,8 @@ export type DemoTabParamList = {
   Search: undefined
   Premium: undefined
 }
+
+const DemoScreen = () => <View style={{ backgroundColor: colors.background, flex: 1 }} />
 
 /**
  * Helper for automatically generating navigation prop types for each route.
@@ -76,7 +78,6 @@ export function TPTNavigator() {
       />
       <Tab.Screen
         name="Podcast"
-        component={MusicNavigator}
         options={{
           tabBarLabel: translate("tpt.podcastTab"),
           tabBarIcon: ({ focused }) => (
@@ -88,10 +89,11 @@ export function TPTNavigator() {
             />
           ),
         }}
-      />
+      >
+        {() => <DemoScreen />}
+      </Tab.Screen>
       <Tab.Screen
         name="Favourites"
-        component={MusicNavigator}
         options={{
           tabBarLabel: translate("tpt.favouritesTab"),
           tabBarIcon: ({ focused }) => (
@@ -103,10 +105,11 @@ export function TPTNavigator() {
             />
           ),
         }}
-      />
+      >
+        {() => <DemoScreen />}
+      </Tab.Screen>
       <Tab.Screen
         name="Search"
-        component={MusicNavigator}
         options={{
           tabBarLabel: translate("tpt.searchTab"),
           tabBarIcon: ({ focused }) => (
@@ -118,10 +121,11 @@ export function TPTNavigator() {
             />
           ),
         }}
-      />
+      >
+        {() => <DemoScreen />}
+      </Tab.Screen>
       <Tab.Screen
         name="Premium"
-        component={MusicNavigator}
         options={{
           tabBarLabel: translate("tpt.premiumTab"),
           tabBarIcon: ({ focused }) => (
@@ -133,7 +137,9 @@ export function TPTNavigator() {
             />
           ),
         }}
-      />
+      >
+        {() => <DemoScreen />}
+      </Tab.Screen>
       {/* <Tab.Screen
         name="DemoShowroom"
         component={DemoShowroomScreen}

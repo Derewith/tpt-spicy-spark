@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import counterReducer from "./counterSlice"
 import playlistsReducer from "./playlistsSlice"
 import tracksReducer from "./tracksSlice"
 
@@ -23,7 +22,6 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
   playlists: playlistsReducer,
   tracks: tracksReducer,
 })

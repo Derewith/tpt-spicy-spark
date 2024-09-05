@@ -72,5 +72,5 @@ const $leftContentStyle: ViewStyle = {
 const $imageStyle: ImageStyle = {
   width: 60,
   height: 60,
-  borderRadius: 4
+  borderRadius: 4,
 }

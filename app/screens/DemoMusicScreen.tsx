@@ -1,11 +1,10 @@
 import React, { FC, useEffect } from "react"
-import { ActivityIndicator, ImageStyle, TextStyle, View, ViewBase, ViewStyle } from "react-native"
+import { ActivityIndicator, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { EmptyState, ListView, Screen, Text, Toggle } from "../components"
 import { colors, spacing } from "../theme"
 
 import { useAppDispatch, useAppSelector } from "app/store/store"
 import { fetchPlaylists } from "app/store/playlistsSlice"
-import { fetchTracks } from "app/store/tracksSlice"
 import { ContentStyle } from "@shopify/flash-list"
 import { delay } from "app/utils/delay"
 import { PlaylistCard } from "app/components/PlaylistCard"
@@ -16,9 +15,6 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
 
   const playlists = useAppSelector((state) => state.playlists.playlists)
   const playlistsStatus = useAppSelector((state) => state.playlists.status)
-  //   const tracks = useAppSelector((state) => state.tracks?.tracks)
-  //   const tracksStatus = useAppSelector((state) => state.tracks?.status)
-  // dispatch(fetchTracks(playlistId))
 
   const [refreshing, setRefreshing] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
@@ -31,7 +27,8 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
     }
   }, [playlistsStatus])
 
-  const handlePlaylistClick = (item) => {
+  // TODO: Implement the type of the playlist item
+  const handlePlaylistClick = (item: any) => {
     _props.navigation.navigate("DemoPlaylist", {
       playlistIndex: item.id,
       picture: item.picture,
@@ -47,7 +44,12 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
   }
 
   return (
-    <Screen preset="fixed" safeAreaEdges={["top"]} contentContainerStyle={$screenContentContainer}>
+    <Screen
+      preset="fixed"
+      safeAreaEdges={["top"]}
+      contentContainerStyle={$screenContentContainer}
+      statusBarStyle="light"
+    >
       <ListView
         contentContainerStyle={$listContentContainer}
         data={playlists.slice()}
@@ -82,7 +84,7 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
           <View style={$heading}>
             <Text preset="bold" text="Playlist che adorerai" />
             {/** // || episodeStore.episodesForList.length > 0 } */}
-            {false && (
+            {/* {true && (
               <View style={$toggle}>
                 <Toggle
                   //   value={episodeStore.favoritesOnly}
@@ -96,7 +98,7 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
                   //   accessibilityLabel={translate("demoPodcastListScreen.accessibility.switch")}
                 />
               </View>
-            )}
+            )} */}
           </View>
         }
         renderItem={({ item, index }) => (
@@ -129,12 +131,6 @@ const $toggle: ViewStyle = {
   marginTop: spacing.md,
 }
 
-// const $container: ViewStyle = {
-//   paddingTop: spacing.lg + spacing.xl,
-//   paddingBottom: spacing.xxl,
-//   paddingHorizontal: spacing.lg,
-// }
-
 const $screenContentContainer: ViewStyle = {
   flex: 1,
 }
@@ -144,8 +140,6 @@ const $labelStyle: TextStyle = {
 }
 
 const $listContentContainer: ContentStyle = {
-  //   paddingHorizontal: spacing.md,
-  paddingTop: spacing.lg + spacing.xl,
   paddingBottom: spacing.lg,
 }
 const $emptyState: ViewStyle = {
@@ -155,4 +149,3 @@ const $emptyState: ViewStyle = {
 const $emptyStateImage: ImageStyle = {
   transform: [{ scaleX: 1 }],
 }
-// @demo remove-file

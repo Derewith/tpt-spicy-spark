@@ -57,7 +57,6 @@ const AppStack = () => {
       {/* <Stack.Screen name="Demo" component={DemoNavigator} /> */}
       <Stack.Screen name="TPT" component={TPTNavigator} />
 
-      {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
