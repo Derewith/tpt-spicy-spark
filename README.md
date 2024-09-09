@@ -2,7 +2,7 @@
 <h3 align="center">React Native app</h3>
 <br />
 
-![screenshots](https://raw.githubusercontent.com/Derewith/tpt-spicy-spark/master/preview.jpg)
+![screenshots](https://raw.githubusercontent.com/Derewith/tpt-spicy-spark/main/preview.jpg)
 <br />
 
 This project is for pure demostration purposes.
