@@ -1,25 +1,18 @@
-# Welcome to your new ignited app!
+<h1 align="center">TPT demo deezer partial clone</h1>
+<h3 align="center">React Native app</h3>
+<br />
 
-[![CircleCI](https://circleci.com/gh/infinitered/ignite.svg?style=svg)](https://circleci.com/gh/infinitered/ignite)
+![screenshots](https://raw.githubusercontent.com/Derewith/tpt-spicy-spark/master/preview.jpg)
+<br />
 
-## The latest and greatest boilerplate for Infinite Red opinions
-
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
-
-Currently includes:
-
-- React Native
-- React Navigation
-- MobX State Tree
-- TypeScript
-- And more!
+This project is for pure demostration purposes.
+It show 2 screens Home screen with a Playlist ScrollView, and a Track information screen if you press the Playlist in the Home screen.
+The project is implemented using redux, typescript, axios, eslint and jest.
 
 ## Quick Start
 
-The Ignite boilerplate project's structure will look similar to this:
-
 ```
-ignite-project
+tpt
 ├── app
 │   ├── components
 │   ├── config
@@ -48,28 +41,16 @@ ignite-project
 │   ├── gradlew.bat
 │   ├── keystores
 │   └── settings.gradle
-├── ignite
-│   └── templates
-|       |── app-icon
-│       ├── component
-│       ├── model
-│       ├── navigator
-│       └── screen
 ├── index.js
 ├── ios
-│   ├── IgniteProject
-│   ├── IgniteProject-tvOS
-│   ├── IgniteProject-tvOSTests
-│   ├── IgniteProject.xcodeproj
-│   └── IgniteProjectTests
+│   ├── tpt
+│   ├── tpt.xcodeproj
 ├── .env
 └── package.json
 
 ```
 
 ### ./app directory
-
-Included in an Ignite boilerplate project is the `app` directory. This is a directory you would normally have to create when using vanilla React Native.
 
 The inside of the `app` directory looks similar to the following:
 
@@ -145,10 +126,6 @@ const MyComponent = () => {
 };
 ```
 
-### ./ignite directory
-
-The `ignite` directory stores all things Ignite, including CLI and boilerplate items. Here you will find templates you can customize to help you get started with React Native.
-
 ### ./test directory
 
 This directory will hold your Jest configs and mocks.
@@ -156,9 +133,3 @@ This directory will hold your Jest configs and mocks.
 ## Running Maestro end-to-end tests
 
 Follow our [Maestro Setup](https://ignitecookbook.com/docs/recipes/MaestroSetup) recipe from the [Ignite Cookbook](https://ignitecookbook.com/)!
-
-## Previous Boilerplates
-
-- [2018 aka Bowser](https://github.com/infinitered/ignite-bowser)
-- [2017 aka Andross](https://github.com/infinitered/ignite-andross)
-- [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
