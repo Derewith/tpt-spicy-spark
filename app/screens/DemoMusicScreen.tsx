@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react"
-import { ActivityIndicator, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { EmptyState, ListView, Screen, Text, Toggle } from "../components"
+import { ActivityIndicator, ImageStyle, View, ViewStyle } from "react-native"
+import { EmptyState, ListView, Screen, Text } from "../components"
 import { colors, spacing } from "../theme"
 
 import { useAppDispatch, useAppSelector } from "app/store/store"
@@ -13,21 +13,20 @@ import { MusicStackScreenProps } from "app/navigators/MusicNavigator"
 export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) => {
   const dispatch = useAppDispatch()
 
-  const playlists = useAppSelector((state) => state.playlists.playlists)
+  const playlists = useAppSelector((state) => state.playlists.data)
   const playlistsStatus = useAppSelector((state) => state.playlists.status)
 
   const [refreshing, setRefreshing] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
   useEffect(() => {
-    if (playlistsStatus === "idle") {
+    if (playlistsStatus === "idle" || playlistsStatus === undefined) {
       setIsLoading(true)
       dispatch(fetchPlaylists())
       setIsLoading(false)
     }
   }, [playlistsStatus])
 
-  // TODO: Implement the type of the playlist item
   const handlePlaylistClick = (item: any) => {
     _props.navigation.navigate("DemoPlaylist", {
       playlistIndex: item.id,
@@ -52,8 +51,7 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
     >
       <ListView
         contentContainerStyle={$listContentContainer}
-        data={playlists.slice()}
-        extraData={playlists.length + playlists.length}
+        data={playlists}
         refreshing={refreshing}
         estimatedItemSize={177}
         numColumns={2}
@@ -65,16 +63,8 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
             <EmptyState
               preset="generic"
               style={$emptyState}
-              headingTx={
-                false
-                  ? "demoPodcastListScreen.noFavoritesEmptyState.heading"
-                  : "Non ci sono playlist"
-              }
-              contentTx={
-                false ? "demoPodcastListScreen.noFavoritesEmptyState.content" : "Riprova più tardi"
-              }
-              button={false ? "" : undefined}
-              buttonOnPress={manualRefresh}
+              heading={"Non ci sono playlist"}
+              content={"Riprova più tardi."}
               imageStyle={$emptyStateImage}
               ImageProps={{ resizeMode: "contain" }}
             />
@@ -82,39 +72,19 @@ export const DemoMusicScreen: FC<MusicStackScreenProps<"DemoMusic">> = (_props) 
         }
         ListHeaderComponent={
           <View style={$heading}>
-            <Text preset="bold" text="Playlist che adorerai" />
-            {/** // || episodeStore.episodesForList.length > 0 } */}
-            {/* {true && (
-              <View style={$toggle}>
-                <Toggle
-                  //   value={episodeStore.favoritesOnly}
-                  //   onValueChange={() =>
-                  //     episodeStore.setProp("favoritesOnly", !episodeStore.favoritesOnly)
-                  //   }
-                  variant="switch"
-                  labelTx="demoPodcastListScreen.onlyFavorites"
-                  labelPosition="left"
-                  labelStyle={$labelStyle}
-                  //   accessibilityLabel={translate("demoPodcastListScreen.accessibility.switch")}
-                />
-              </View>
-            )} */}
+            {playlists && <Text preset="bold" text="Playlist che adorerai" />}
           </View>
         }
         renderItem={({ item, index }) => (
           <PlaylistCard
             playlist={item}
             style={[
-              // eslint-disable-next-line react-native/no-inline-styles
               index % 2 ? { paddingRight: spacing.xs } : { paddingLeft: spacing.xs },
-              // eslint-disable-next-line react-native/no-inline-styles
               index > 1 ? { paddingTop: spacing.xl } : {},
               // eslint-disable-next-line react-native/no-inline-styles
               { flex: 1, marginHorizontal: spacing.xs },
             ]}
             onPress={() => handlePlaylistClick(item)}
-            // isFavorite={episodeStore.hasFavorite(item)}
-            // onPressFavorite={() => episodeStore.toggleFavorite(item)}
           />
         )}
       />
@@ -127,16 +97,8 @@ const $heading: ViewStyle = {
   paddingHorizontal: spacing.md,
 }
 
-const $toggle: ViewStyle = {
-  marginTop: spacing.md,
-}
-
 const $screenContentContainer: ViewStyle = {
   flex: 1,
-}
-
-const $labelStyle: TextStyle = {
-  textAlign: "left",
 }
 
 const $listContentContainer: ContentStyle = {
@@ -144,6 +106,7 @@ const $listContentContainer: ContentStyle = {
 }
 const $emptyState: ViewStyle = {
   marginTop: spacing.xxl,
+  paddingHorizontal: spacing.lg,
 }
 
 const $emptyStateImage: ImageStyle = {

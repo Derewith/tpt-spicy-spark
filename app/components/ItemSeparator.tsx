@@ -1,7 +1,7 @@
 import React from "react"
 import { View, ViewStyle } from "react-native"
 
-export const ItemSeparator = () => {
+export function ItemSeparator() {
   return <View style={$separator} />
 }
 const $separator: ViewStyle = {

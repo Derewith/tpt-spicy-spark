@@ -138,6 +138,7 @@ export function Button(props: ButtonProps) {
       $textStyleOverride,
       !!pressed && [$pressedTextPresets[preset], $pressedTextStyleOverride],
       !!disabled && $disabledTextStyleOverride,
+      { color: "black" },
     ]
   }
 

@@ -18,18 +18,11 @@ export type MusicStackParamList = {
     user: UserType
   }
 }
-
-/**
- * This is a list of all the route names that will exit the app if the back button
- * is pressed while in that screen. Only affects Android.
- */
-
 export type MusicStackScreenProps<T extends keyof MusicStackParamList> = NativeStackScreenProps<
   MusicStackParamList,
   T
 >
 
-// Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<MusicStackParamList>()
 
 const MusicStack = () => {

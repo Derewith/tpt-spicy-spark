@@ -40,22 +40,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 // Web linking configuration
 const prefix = Linking.createURL("/")
 const config = {
-  screens: {
-    Login: {
-      path: "",
-    },
-    Welcome: "welcome",
-    Demo: {
-      screens: {
-        DemoShowroom: {
-          path: "showroom/:queryIndex?/:itemIndex?",
-        },
-        DemoDebug: "debug",
-        DemoPodcastList: "podcast",
-        DemoCommunity: "community",
-      },
-    },
-  },
+  screens: {},
 }
 
 interface AppProps {
@@ -76,10 +61,6 @@ function App(props: AppProps) {
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
-
-  // React.useEffect(() => {
-  //   setTimeout(hideSplashScreen, 500)
-  // }, [])
 
   const onBeforeLiftPersistGate = () => {
     // If your initialization scripts run very fast, it's good to show the splash screen for just a bit longer to prevent flicker.

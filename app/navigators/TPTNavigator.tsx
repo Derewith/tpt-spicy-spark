@@ -10,11 +10,16 @@ import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 import { MusicNavigator } from "./MusicNavigator"
 
 import { SvgXml } from "react-native-svg"
-import musicSVG from "../../assets/icons/svg/mp3_deezer-icons.svg"
-import podcastSVG from "../../assets/icons/svg/podcast_deezer-icons.svg"
 
+// @ts-expect-error -- TSCONVERSION
+import musicSVG from "../../assets/icons/svg/mp3_deezer-icons.svg"
+// @ts-expect-error -- TSCONVERSION
+import podcastSVG from "../../assets/icons/svg/podcast_deezer-icons.svg"
+// @ts-expect-error -- TSCONVERSION
 import favouritesSVG from "../../assets/icons/svg/love_deezer-icons.svg"
+// @ts-expect-error -- TSCONVERSION
 import searchSVG from "../../assets/icons/svg/search_deezer-icons.svg"
+// @ts-expect-error -- TSCONVERSION
 import premiumSVG from "../../assets/icons/svg/deezer-short_deezer-icons.svg"
 
 export type DemoTabParamList = {
@@ -25,6 +30,9 @@ export type DemoTabParamList = {
   Premium: undefined
 }
 
+/**
+ * Demo screen that is used for each tab.
+ */
 const DemoScreen = () => <View style={{ backgroundColor: colors.background, flex: 1 }} />
 
 /**
@@ -140,50 +148,6 @@ export function TPTNavigator() {
       >
         {() => <DemoScreen />}
       </Tab.Screen>
-      {/* <Tab.Screen
-        name="DemoShowroom"
-        component={DemoShowroomScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.componentsTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="DemoCommunity"
-        component={DemoCommunityScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.communityTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="community" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="DemoPodcastList"
-        component={DemoPodcastListScreen}
-        options={{
-          tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),
-          tabBarLabel: translate("demoNavigator.podcastListTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="podcast" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="DemoDebug"
-        component={DemoDebugScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.debugTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="debug" color={focused ? colors.tint : undefined} size={30} />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   )
 }

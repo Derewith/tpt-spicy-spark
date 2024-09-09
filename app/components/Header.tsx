@@ -57,7 +57,7 @@ export interface HeaderProps {
   /**
    * Optional subtitle style override.
    */
-  subtitle: TextProps["text"]
+  subtitle?: TextProps["text"]
   /**
    * Title text which is looked up via i18n.
    */
@@ -67,7 +67,7 @@ export interface HeaderProps {
    * as well as explicitly setting locale or translation fallbacks.
    */
   subtitleTxOptions?: TextProps["txOptions"]
-  subtitleStyleOverride: StyleProp<TextStyle>
+  subtitleStyleOverride?: StyleProp<TextStyle>
   /**
    * Icon that should appear on the left.
    * Can be used with `onLeftPress`.

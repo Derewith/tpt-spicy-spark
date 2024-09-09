@@ -4,17 +4,16 @@ import axios from "axios"
 interface Playlist {
   id: number
   title: string
-  // Add other relevant fields
 }
 
 interface PlaylistsState {
-  playlists: Playlist[]
+  data: Playlist[]
   status: "idle" | "loading" | "succeeded" | "failed"
   error: string | null
 }
 
 const initialState: PlaylistsState = {
-  playlists: [],
+  data: [],
   status: "idle",
   error: null,
 }
@@ -35,15 +34,12 @@ const playlistsSlice = createSlice({
       })
       .addCase(fetchPlaylists.fulfilled, (state, action) => {
         state.status = "succeeded"
-        state.playlists = action.payload
+        state.data = action.payload
       })
       .addCase(fetchPlaylists.rejected, (state, action) => {
         state.status = "failed"
         state.error = action.error.message || null
       })
-    //   .addCase(fetchPlaylists.settled, (state) => {
-    //     state.status = "idle"
-    //   })
   },
 })
 
